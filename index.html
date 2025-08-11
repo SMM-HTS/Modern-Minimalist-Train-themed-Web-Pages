@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Data Project - Canadian Cloud Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #a52a2a;
+            --primary-dark: #7a1a1a;
+            --primary-light: #d45a5a;
+            --secondary: #333333;
+            --accent: #e67e22;
+            --light: #f5f5f5;
+            --dark: #222222;
+            --text: #444444;
+            --text-light: #777777;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            position: relative;
+        }
+        
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            top: -5px;
+            right: -5px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo-text span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1519817650390-64a93db51149?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            opacity: 0;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+        
+        .secondary-button {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .secondary-button:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 24px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+        }
+        
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 5px solid var(--primary);
+            border-radius: 10px;
+            top: -20px;
+            left: -20px;
+            z-index: -1;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 30px;
+        }
+        
+        .service-content h3 {
+            font-size: 22px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .service-content p {
+            margin-bottom: 20px;
+        }
+        
+        .service-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+        }
+        
+        .service-link:hover {
+            color: var(--primary-dark);
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .pricing-tables {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+        }
+        
+        .pricing-table {
+            min-width: 300px;
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .pricing-table h3 {
+            font-size: 22px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .price-highlight {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-item {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 30px;
+        }
+        
+        .feature-item h3 {
+            font-size: 20px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(rgba(165, 42, 42, 0.9), rgba(165, 42, 42, 0.9)), url('https://images.unsplash.com/photo-1517438476312-10d79c077509?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        .footer-bottom p {
+            color: #bbb;
+        }
+        
+        /* Landing Page Styles */
+        .landing-page {
+            display: none;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .landing-page h1 {
+            font-size: 42px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .landing-page p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image::before {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title h2 {
+                font-size: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 30px;
+            }
+            
+            .pricing-tables {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Page -->
+    <div id="main-page">
+        <!-- Header -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <div class="logo-text">Train<span>Data</span></div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <a href="https://buy.parentcompany.com/projects.html" class="cta-button">Get Started</a>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>Your Canadian Cloud Solution</h1>
+                <p>Secure, reliable, and affordable cloud infrastructure hosted entirely in Canada. Bring your data home with our train-powered cloud services.</p>
+                <div class="hero-buttons">
+                    <a href="#pricing" class="cta-button">View Plans</a>
+                    <a href="#contact" class="secondary-button">Contact Us</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Why Choose Train Data Project</h2>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Canadian Data for Canadian Businesses</h3>
+                        <p>Train Data Project is your Canadian cloud solution for Virtual Machines, remote desktops, Linux and Windows servers, workflows, and more. Join the increasing number of businesses and individuals using cloud infrastructure in Canada with guaranteed data storage in Canada and corporate ownership in Canada.</p>
+                        <p>Get your data and cloud infrastructure set up here in Canada. In a world with increasing geopolitical instability, let us help you bring your data and workloads home. We can help you to gauge your capacity requirements, identify workflows, and eventually repatriate your data into Train Data Project.</p>
+                        <a href="#services" class="cta-button">Our Services</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1517438476312-10d79c077509?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Train Data Project">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Cloud Services</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Virtual Machines">
+                        </div>
+                        <div class="service-content">
+                            <h3>Virtual Machines</h3>
+                            <p>Flexible and scalable virtual machines for all your computing needs. Choose from our pre-configured plans or customize your own.</p>
+                            <a href="#pricing" class="service-link">View Plans <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80" alt="Dedicated Compute">
+                        </div>
+                        <div class="service-content">
+                            <h3>Dedicated Compute</h3>
+                            <p>Private cloud nodes for your most demanding workloads. Fully managed VM infrastructure with dedicated resources.</p>
+                            <a href="#pricing" class="service-link">View Options <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Data Repatriation">
+                        </div>
+                        <div class="service-content">
+                            <h3>Data Repatriation</h3>
+                            <p>Our specialists can help you create a repatriation plan for the data and workflows in your business.</p>
+                            <a href="#contact" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Simple, Transparent Pricing</h2>
+                </div>
+                <div class="pricing-tables">
+                    <div class="pricing-table">
+                        <h3>Virtual Machines</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Plan Name</th>
+                                    <th>vCPU</th>
+                                    <th>RAM</th>
+                                    <th>Storage</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Starter</td>
+                                    <td>2</td>
+                                    <td>12 GB</td>
+                                    <td>64 GB SSD</td>
+                                    <td class="price-highlight">$49/mo</td>
+                                </tr>
+                                <tr>
+                                    <td>Power</td>
+                                    <td>4</td>
+                                    <td>24 GB</td>
+                                    <td>256 GB SSD</td>
+                                    <td class="price-highlight">$99/mo</td>
+                                </tr>
+                                <tr>
+                                    <td>Power+</td>
+                                    <td>4</td>
+                                    <td>24 GB</td>
+                                    <td>1 TB NVMe</td>
+                                    <td class="price-highlight">$129/mo</td>
+                                </tr>
+                                <tr>
+                                    <td>Pro</td>
+                                    <td>6</td>
+                                    <td>32 GB</td>
+                                    <td>512 GB NVMe</td>
+                                    <td class="price-highlight">$159/mo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pricing-table">
+                        <h3>Dedicated Compute</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Unit</th>
+                                    <th>Specs</th>
+                                    <th>Setup</th>
+                                    <th>Price/mo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>CCU3</td>
+                                    <td>4 vCPU, 12-16GB RAM</td>
+                                    <td>$150</td>
+                                    <td class="price-highlight">$39-49/mo</td>
+                                </tr>
+                                <tr>
+                                    <td>CCU2</td>
+                                    <td>4 vCPU, 64GB RAM</td>
+                                    <td>$749</td>
+                                    <td class="price-highlight">$129/mo</td>
+                                </tr>
+                                <tr>
+                                    <td>CCU2+</td>
+                                    <td>8 vCPU, 64GB RAM</td>
+                                    <td>$749</td>
+                                    <td class="price-highlight">$169/mo</td>
+                                </tr>
+                                <tr>
+                                    <td>CCU1</td>
+                                    <td>16 vCPU, 128GB RAM</td>
+                                    <td>$1999</td>
+                                    <td class="price-highlight">$299/mo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pricing-table">
+                        <h3>Add-ons</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Weekly Backups</td>
+                                    <td class="price-highlight">+$5/mo</td>
+                                </tr>
+                                <tr>
+                                    <td>Nightly Backups</td>
+                                    <td class="price-highlight">+$15/mo</td>
+                                </tr>
+                                <tr>
+                                    <td>High Availability Disk</td>
+                                    <td class="price-highlight">+$20/mo</td>
+                                </tr>
+                                <tr>
+                                    <td>VM Failover Protect</td>
+                                    <td class="price-highlight">+$20/mo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Why Train Data Project</h2>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h3>Cost Effective</h3>
+                        <p>Cheaper than big providers like AWS or Google with the same reliability.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Canadian Data</h3>
+                        <p>All data is hosted on Canadian soil, protected from foreign interference.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>High Availability</h3>
+                        <p>Failover to other nodes and multiple backup locations across Canada.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>Secure Network</h3>
+                        <p>Segregated network options and VPN protection for all your data.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <h2>Ready to Bring Your Data Home?</h2>
+                <p>Our team of specialists can help you create a repatriation plan for your business data and workflows. Contact us today to get started.</p>
+                <a href="https://buy.parentcompany.com/projects.html" class="cta-button">Start Your Project</a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Contact Us</h2>
+                </div>
+                <div style="text-align: center; margin-bottom: 50px;">
+                    <p style="font-size: 18px; margin-bottom: 20px;">Have questions about our services or need help with your cloud strategy? Reach out to our team.</p>
+                    <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+                        <div style="text-align: center;">
+                            <i class="fas fa-envelope" style="font-size: 24px; color: var(--primary); margin-bottom: 10px;"></i>
+                            <p>Email us at<br><strong>admin@parentcompany.com</strong></p>
+                        </div>
+                        <div style="text-align: center;">
+                            <i class="fas fa-map-marker-alt" style="font-size: 24px; color: var(--primary); margin-bottom: 10px;"></i>
+                            <p>Our address<br><strong>City, Province, Canada, V5V 5V5</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>Train Data Project</h3>
+                        <p>Your Canadian cloud solution for Virtual Machines, remote desktops, Linux and Windows servers, workflows, and more.</p>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#services">Virtual Machines</a></li>
+                            <li><a href="#services">Dedicated Compute</a></li>
+                            <li><a href="#services">Data Repatriation</a></li>
+                            <li><a href="#pricing">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Legal</h3>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Data Protection</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Train Data Project. Powered by Parent Company Systems. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Landing Page (Hidden by default) -->
+    <div id="landing-page" class="landing-page">
+        <div class="container">
+            <h1>Special Promotion</h1>
+            <p>Limited time offer for new customers. Get 20% off your first 3 months of any virtual machine plan when you sign up today.</p>
+            <a href="https://buy.parentcompany.com/projects.html" class="cta-button">Claim Your Discount</a>
+        </div>
+    </div>
+
+    <script>
+        // Simple script to toggle between main page and landing page
+        // This would normally be handled by separate pages in a real implementation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check URL for landing page parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const isLandingPage = urlParams.get('landing');
+            
+            if (isLandingPage) {
+                document.getElementById('main-page').style.display = 'none';
+                document.getElementById('landing-page').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
